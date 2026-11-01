@@ -1,8 +1,8 @@
 title: Guoxu Zhao
-description: Guoxu Zhao 的个人博客
+description: Guoxu Zhao's personal blog
 url: "https://zguoxu.github.io"
 baseurl: ""
-lang: zh-CN
+lang: en
 permalink: /posts/:year/:month/:day/:title/
 exclude:
   - BLOG-GUIDE.md

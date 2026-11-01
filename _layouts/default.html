@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ site.lang | default: 'zh-CN' }}">
+<html lang="{{ site.lang | default: 'en' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,10 +11,10 @@
   <div class="site-shell">
     <header class="site-header">
       <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title | escape }}<span aria-hidden="true">.</span></a>
-      <nav aria-label="主导航"><a href="{{ '/' | relative_url }}#profile">个人经历</a><a href="{{ '/' | relative_url }}#honors">荣誉与奖项</a><a href="{{ '/' | relative_url }}#journal">学习心得分享</a></nav>
+      <nav aria-label="Main navigation"><a href="{{ '/' | relative_url }}#profile">Experience</a><a href="{{ '/' | relative_url }}#honors">Honors &amp; Awards</a><a href="{{ '/' | relative_url }}#journal">Learning Notes</a></nav>
     </header>
     <main>{{ content }}</main>
-    <footer class="site-footer"><span>© {{ 'now' | date: '%Y' }} {{ site.title | escape }}</span><span>写作 · 思考 · 记录</span></footer>
+    <footer class="site-footer"><span>© {{ 'now' | date: '%Y' }} {{ site.title | escape }}</span><span>Writing · Thinking · Documenting</span></footer>
   </div>
 </body>
 </html>

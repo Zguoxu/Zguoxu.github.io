@@ -18,3 +18,6 @@
 
 /* Navigation and writing metrics */
 .writing-feature-metric{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.writing-feature-metric .writing-feature-description{white-space:nowrap}@media(max-width:600px){.writing-feature{flex-direction:column;align-items:flex-start;gap:18px}.writing-feature-metric{gap:10px}}@media(max-width:420px){.site-header{height:auto;padding:20px 0;flex-direction:column;align-items:flex-start;gap:18px}.site-header nav{width:100%;justify-content:space-between;gap:12px}}
+
+/* English layout */
+.hero-portrait{padding:12px}.article-date{font-size:12px;color:var(--muted)}@media(max-width:560px){.site-header{height:auto;padding:20px 0;flex-direction:column;align-items:flex-start;gap:18px}.site-header nav{width:100%;justify-content:flex-start;flex-wrap:wrap;gap:12px 22px}}
