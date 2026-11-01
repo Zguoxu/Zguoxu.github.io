@@ -60,6 +60,49 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-
 .hero-portrait { width: 100%; margin: 0; padding: 11px; background: #ebe4da; border: 1px solid #e0d8cc; border-radius: 18px; }
 .hero-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
 
+/* Decorative shapes: warm, hand-drawn feel */
+.hero { position: relative; }
+.hero-copy, .hero-portrait { position: relative; z-index: 1; }
+.deco { position: absolute; pointer-events: none; z-index: 0; }
+.deco-blob {
+  right: -46px; top: 52px; width: min(440px, 46%); aspect-ratio: 1;
+  background: #ecd9c8; opacity: .75;
+  border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%;
+  animation: blob-drift 18s ease-in-out infinite alternate;
+}
+.deco-spark { background: url('images/spark.svg') center / contain no-repeat; }
+.deco-spark-lg { right: -30px; top: 26px; width: 92px; height: 92px; animation: spark-spin 40s linear infinite; }
+.deco-spark-sm { left: 44%; bottom: 52px; width: 34px; height: 34px; opacity: .55; animation: spark-spin 28s linear infinite reverse; }
+.deco-ring { left: -34px; bottom: 36px; width: 118px; height: 118px; border: 1.5px dashed #cdb8a6; border-radius: 50%; }
+@keyframes blob-drift {
+  to { border-radius: 44% 56% 42% 58% / 56% 44% 56% 44%; transform: rotate(8deg) scale(1.04); }
+}
+@keyframes spark-spin { to { transform: rotate(360deg); } }
+
+.hero-portrait { border-radius: 24px 24px 24px 90px; }
+.hero-portrait img { border-radius: 14px 14px 14px 80px; }
+
+.section-heading h2::before {
+  content: ''; display: inline-block; width: .62em; height: .62em; margin-right: .3em;
+  background: url('images/spark.svg') center / contain no-repeat;
+}
+.profile-section-heading h2::before, .honors-group-title::before {
+  content: ''; display: inline-block; width: .5em; height: .5em; margin-right: .4em;
+  background: url('images/spark.svg') center / contain no-repeat; opacity: .8;
+}
+.profile-logo, .writing-feature { box-shadow: 0 1px 0 #fff inset, 0 6px 18px -12px rgba(120, 80, 50, .35); }
+.writing-feature { position: relative; overflow: hidden; }
+.writing-feature::after {
+  content: ''; position: absolute; right: -36px; bottom: -44px; width: 150px; height: 150px;
+  background: url('images/spark.svg') center / contain no-repeat; opacity: .08;
+  pointer-events: none;
+}
+.writing-feature > * { position: relative; z-index: 1; }
+.site-footer span:first-child::before {
+  content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; vertical-align: -1px;
+  background: url('images/spark.svg') center / contain no-repeat;
+}
+
 .profile-overview, .honors, .journal { border-top: 1px solid var(--line); }
 .profile-overview { padding: 80px 0 32px; }
 .honors { padding: 80px 0 88px; }
@@ -156,6 +199,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-
   .hero h1 { font-size: clamp(72px, 17vw, 104px); }
   .hero-note { margin: 25px 0 27px; }
   .hero-portrait { width: min(100%, 365px); }
+  .deco-blob { right: -30px; top: auto; bottom: 20px; width: 70%; }
+  .deco-spark-lg { right: 4px; top: auto; bottom: 8px; width: 64px; height: 64px; }
+  .deco-spark-sm, .deco-ring { display: none; }
   .section-heading { margin-bottom: 30px; }
   .profile-section { padding: 30px 0 38px; }
   .profile-entry { grid-template-columns: 58px minmax(0, 1fr); gap: 16px; }
