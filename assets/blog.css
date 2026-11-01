@@ -14,3 +14,4 @@
 
 /* Honors and awards */
 .honors{border-top:1px solid var(--line);padding:72px 0 82px}.honors-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}.honors-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:12px 28px;padding:21px 0;border-bottom:1px solid var(--line)}.honor-name{font-size:16px;line-height:1.65}.honor-detail{font-size:12px;font-weight:600;letter-spacing:.03em;color:#607a50;text-align:right;white-space:nowrap}@media(max-width:700px){.honors{padding:65px 0 72px}.honors-list li{grid-template-columns:1fr;gap:5px;padding:18px 0}.honor-name{font-size:15px}.honor-detail{text-align:left}}
+.honors-group+.honors-group{margin-top:38px}.honors-group-title{display:flex;align-items:baseline;gap:14px;margin:0 0 16px;font-size:19px;font-weight:500}.honors-group-title span{color:#8b9583;font-size:10px;font-weight:700;letter-spacing:.14em}@media(max-width:700px){.honors-group+.honors-group{margin-top:32px}}
