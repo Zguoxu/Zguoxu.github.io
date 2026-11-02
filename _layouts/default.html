@@ -43,5 +43,47 @@
       items.forEach(function (el) { io.observe(el); });
     })();
   </script>
+  <script>
+    (function () {
+      var el = document.querySelector('.hero-note');
+      if (!el) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var text = el.textContent.trim();
+      if (reduce || !text) { el.classList.add('tw-ready'); return; }
+      el.setAttribute('aria-label', text);
+      var wrap = document.createElement('span');
+      wrap.setAttribute('aria-hidden', 'true');
+      var chars = [];
+      text.split(' ').forEach(function (word, i, all) {
+        var w = document.createElement('span');
+        w.className = 'tw-word';
+        Array.from(word).forEach(function (c) {
+          var s = document.createElement('span');
+          s.className = 'tw-ch';
+          s.textContent = c;
+          w.appendChild(s);
+          chars.push(s);
+        });
+        wrap.appendChild(w);
+        if (i < all.length - 1) wrap.appendChild(document.createTextNode(' '));
+      });
+      var cursor = document.createElement('span');
+      cursor.className = 'tw-cursor';
+      el.textContent = '';
+      el.appendChild(wrap);
+      chars[0].parentNode.insertBefore(cursor, chars[0]);
+      el.classList.add('tw-ready');
+      var n = 0;
+      function step() {
+        var c = chars[n];
+        c.classList.add('on');
+        n++;
+        if (n < chars.length) chars[n].parentNode.insertBefore(cursor, chars[n]);
+        else c.parentNode.appendChild(cursor);
+        if (n < chars.length) setTimeout(step, /[,.]/.test(c.textContent) ? 320 : 38 + Math.random() * 34);
+      }
+      setTimeout(step, 700);
+    })();
+  </script>
 </body>
 </html>

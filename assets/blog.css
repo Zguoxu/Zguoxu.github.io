@@ -101,6 +101,14 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-
   animation: scribble-draw 1.4s cubic-bezier(.5, 0, .2, 1) .6s both;
 }
 @keyframes scribble-draw { to { stroke-dashoffset: 0; } }
+.js .hero-note:not(.tw-ready) { visibility: hidden; animation: tw-fallback 0s 2.5s forwards; }
+@keyframes tw-fallback { to { visibility: visible; } }
+.tw-word { display: inline-block; white-space: nowrap; }
+.tw-ch { opacity: 0; }
+.tw-ch.on { opacity: 1; }
+.tw-cursor { display: inline-block; position: relative; width: 0; height: 1em; vertical-align: -.14em; }
+.tw-cursor::after { content: ''; position: absolute; left: 1px; top: .06em; width: 2px; height: 1.05em; background: var(--accent); animation: tw-blink 1.05s steps(1) infinite; }
+@keyframes tw-blink { 50% { opacity: 0; } }
 .hero-note { max-width: 390px; margin: 30px 0 34px; color: var(--muted); font-family: var(--serif); font-size: 19px; font-style: italic; line-height: 1.6; }
 .hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 27px; }
 .text-link { display: inline-flex; align-items: center; gap: 9px; padding: 0 0 7px; border-bottom: 1px solid var(--link-line); font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
