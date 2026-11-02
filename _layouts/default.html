@@ -20,6 +20,7 @@
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+  <div class="wash" aria-hidden="true"><span class="wash-blob" data-speed="0.08" style="--top:1%;--left:58%;--size:780px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-0s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.14" style="--top:14%;--left:-14%;--size:620px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-7s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.1" style="--top:30%;--left:62%;--size:700px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-14s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.18" style="--top:50%;--left:-10%;--size:640px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-21s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.06" style="--top:68%;--left:55%;--size:720px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-28s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.12" style="--top:86%;--left:10%;--size:760px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-35s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span></div>
   <div class="site-shell">
     <header class="site-header">
       <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title | escape }}<span aria-hidden="true">.</span></a>
@@ -83,6 +84,23 @@
         if (n < chars.length) setTimeout(step, /[,.]/.test(c.textContent) ? 320 : 38 + Math.random() * 34);
       }
       setTimeout(step, 700);
+    })();
+  </script>
+  <script>
+    (function () {
+      var blobs = document.querySelectorAll('.wash-blob');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!blobs.length || reduce) return;
+      var ticking = false;
+      function update() {
+        var y = window.pageYOffset;
+        blobs.forEach(function (b) { b.style.transform = 'translate3d(0,' + (y * b.dataset.speed).toFixed(1) + 'px,0)'; });
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
     })();
   </script>
 </body>
