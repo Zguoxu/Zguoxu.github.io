@@ -114,7 +114,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-
 .deco-spark { background: var(--spark) center / contain no-repeat; }
 .deco-spark-lg { right: -30px; top: 26px; width: 92px; height: 92px; animation: spark-spin 40s linear infinite; }
 .deco-spark-sm { left: 44%; bottom: 52px; width: 34px; height: 34px; opacity: .55; animation: spark-spin 28s linear infinite reverse; }
-.deco-ring { left: -34px; bottom: 36px; width: 118px; height: 118px; border: 1.5px dashed var(--ring); border-radius: 50%; }
+.deco-ring { left: 40%; top: 64px; width: 96px; height: 96px; border: 1.5px dashed var(--ring); border-radius: 50%; }
 @keyframes blob-drift {
   to { border-radius: 44% 56% 42% 58% / 56% 44% 56% 44%; transform: rotate(8deg) scale(1.04); }
 }
@@ -171,6 +171,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-
 .profile-dates { color: var(--muted); font-size: 12px; white-space: nowrap; }
 .profile-role { margin: 9px 0 0; font-size: 15px; line-height: 1.6; }
 .profile-note { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.profile-motto { margin: 12px 0 0; color: var(--accent-deep); font-family: var(--serif); font-size: 15px; font-style: italic; line-height: 1.6; }
 .profile-fact { display: flex; align-items: baseline; flex-wrap: wrap; gap: 14px; margin-top: 19px; color: var(--muted); font-size: 12px; }
 .profile-fact strong { color: var(--ink); font-family: var(--serif); font-size: 24px; font-weight: 400; }
 .profile-fact small { color: var(--muted); font-family: var(--sans); font-size: 12px; }
