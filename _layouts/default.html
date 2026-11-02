@@ -103,5 +103,49 @@
       update();
     })();
   </script>
+  <script>
+    (function () {
+      var spark = document.querySelector('.eye-spark');
+      if (!spark || !window.matchMedia) return;
+      var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!fine || reduce) return;
+      var rays = Array.prototype.slice.call(spark.querySelectorAll('.ray')).map(function (el) {
+        return { el: el, a: parseFloat(el.style.getPropertyValue('--a')), t: 0, s: 1 };
+      });
+      spark.classList.add('eye-on');
+      var mx = null, my = null, raf = 0;
+      function frame() {
+        raf = 0;
+        var moving = false, cx = 0, cy = 0;
+        if (mx !== null) {
+          var r = spark.getBoundingClientRect();
+          cx = r.left + r.width / 2;
+          cy = r.top + r.height / 2;
+        }
+        rays.forEach(function (ray) {
+          var tt = 0, ts = 1;
+          if (mx !== null) {
+            var p = Math.atan2(my - cy, mx - cx);
+            var diff = p - ray.a * Math.PI / 180;
+            tt = Math.sin(diff) * 13;
+            ts = 1 + 0.12 * Math.max(0, Math.cos(diff));
+          }
+          ray.t += (tt - ray.t) * 0.12;
+          ray.s += (ts - ray.s) * 0.12;
+          if (Math.abs(tt - ray.t) > 0.02 || Math.abs(ts - ray.s) > 0.0005) moving = true;
+          ray.el.style.setProperty('--t', ray.t.toFixed(2) + 'deg');
+          ray.el.style.setProperty('--s', ray.s.toFixed(3));
+        });
+        if (moving) raf = requestAnimationFrame(frame);
+      }
+      function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+      window.addEventListener('pointermove', function (e) {
+        if (e.pointerType && e.pointerType !== 'mouse') return;
+        mx = e.clientX; my = e.clientY; kick();
+      }, { passive: true });
+      document.addEventListener('mouseleave', function () { mx = null; my = null; kick(); });
+    })();
+  </script>
 </body>
 </html>

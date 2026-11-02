@@ -165,6 +165,10 @@ body::before {
 .deco { position: absolute; pointer-events: none; z-index: 0; }
 .deco-spark { background: var(--spark) center / contain no-repeat; }
 .deco-spark-lg { right: -30px; top: 26px; width: 92px; height: 92px; animation: spark-spin 40s linear infinite; }
+.eye-spark { overflow: visible; }
+.eye-spark .ray { transform-origin: 50px 50px; transform: rotate(calc(var(--a) + var(--t, 0deg))) scaleX(var(--s, 1)); }
+.eye-spark line { stroke: var(--accent); stroke-width: 7.5; stroke-linecap: round; }
+.eye-spark.eye-on { animation: none; }
 .deco-spark-sm { left: 44%; bottom: 52px; width: 34px; height: 34px; opacity: .55; animation: spark-spin 28s linear infinite reverse; }
 .deco-ring { left: 40%; top: 64px; width: 96px; height: 96px; border: 1.5px dashed var(--ring); border-radius: 50%; }
 @keyframes spark-spin { to { transform: rotate(360deg); } }
