@@ -18,13 +18,21 @@
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/blog.css' | relative_url }}">
   <script>document.documentElement.classList.add('js');</script>
+  <script>
+    (function () {
+      var r = document.documentElement, t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      r.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
   <div class="wash" aria-hidden="true"><span class="wash-blob" data-speed="0.08" style="--top:1%;--left:58%;--size:780px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-0s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.14" style="--top:14%;--left:-14%;--size:620px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-7s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.1" style="--top:30%;--left:62%;--size:700px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-14s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.18" style="--top:50%;--left:-10%;--size:640px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-21s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.06" style="--top:68%;--left:55%;--size:720px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-28s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.12" style="--top:86%;--left:10%;--size:760px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-35s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span></div>
   <div class="site-shell">
     <header class="site-header">
       <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title | escape }}<span aria-hidden="true">.</span></a>
-      <nav aria-label="Main navigation"><a href="{{ '/' | relative_url }}#about">About</a><a href="{{ '/' | relative_url }}#profile">Experience</a><a href="{{ '/' | relative_url }}#skills">Skills</a><a href="{{ '/' | relative_url }}#honors">Honors &amp; Awards</a><a href="{{ '/' | relative_url }}#journal">Learning Notes</a></nav>
+      <nav aria-label="Main navigation"><a href="{{ '/' | relative_url }}#about">About</a><a href="{{ '/' | relative_url }}#profile">Experience</a><a href="{{ '/' | relative_url }}#skills">Skills</a><a href="{{ '/' | relative_url }}#honors">Honors &amp; Awards</a><a href="{{ '/' | relative_url }}#journal">Learning Notes</a><button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button></nav>
     </header>
     <main>{{ content }}</main>
     <footer class="site-footer"><span>© {{ 'now' | date: '%Y' }} {{ site.title | escape }}</span></footer>
@@ -145,6 +153,31 @@
         mx = e.clientX; my = e.clientY; kick();
       }, { passive: true });
       document.addEventListener('mouseleave', function () { mx = null; my = null; kick(); });
+    })();
+  </script>
+  <script>
+    (function () {
+      var r = document.documentElement, b = document.querySelector('.theme-toggle');
+      if (!b) return;
+      var metas = document.querySelectorAll('meta[name="theme-color"]');
+      var colors = { light: '#f8f6f0', dark: '#1f1c19' };
+      function apply(t) {
+        r.setAttribute('data-theme', t);
+        b.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        metas.forEach(function (m) { m.removeAttribute('media'); m.setAttribute('content', colors[t]); });
+      }
+      apply(r.getAttribute('data-theme'));
+      b.addEventListener('click', function () {
+        var t = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(t);
+        try { localStorage.setItem('theme', t); } catch (e) {}
+      });
+      var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      if (mq && mq.addEventListener) mq.addEventListener('change', function (e) {
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (x) {}
+        if (!saved) apply(e.matches ? 'dark' : 'light');
+      });
     })();
   </script>
 </body>
