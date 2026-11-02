@@ -93,7 +93,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-
   line-height: .94;
 }
 .hero h1 em { color: var(--accent); font-weight: 400; }
-.hero-note { max-width: 390px; margin: 30px 0 34px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+.hero-note { max-width: 390px; margin: 30px 0 34px; color: var(--muted); font-family: var(--serif); font-size: 19px; font-style: italic; line-height: 1.6; }
 .hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 27px; }
 .text-link { display: inline-flex; align-items: center; gap: 9px; padding: 0 0 7px; border-bottom: 1px solid var(--link-line); font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
 .text-link span { color: var(--accent); }
