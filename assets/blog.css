@@ -330,6 +330,11 @@ bdi.zh { display: none; font-style: normal; }
 :root[data-lang='zh'] .lang-toggle .lg-zh { background: var(--accent); color: var(--paper); }
 :root:not([data-lang]) .lang-toggle .lg-en { background: var(--accent); color: var(--paper); }
 
+/* Crossfade while switching language */
+main, .site-footer, .wordmark, .site-header nav > a { transition: opacity .16s ease; }
+.site-header nav > a { transition: color .2s ease, opacity .16s ease; }
+.lang-out main, .lang-out .site-footer, .lang-out .wordmark, .lang-out .site-header nav > a { opacity: 0; }
+
 /* Decorative shapes: warm, hand-drawn feel */
 .hero { position: relative; }
 .hero-copy, .hero-portrait { position: relative; z-index: 1; }

@@ -68,13 +68,26 @@
       }
       labels(r.getAttribute('data-lang'));
       if (!b) return;
-      b.addEventListener('click', function () {
-        var l = r.getAttribute('data-lang') === 'zh' ? 'en' : 'zh';
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var busy = false;
+      function swap(l) {
         r.setAttribute('data-lang', l);
         r.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
         try { localStorage.setItem('lang', l); } catch (e) {}
         labels(l);
         document.dispatchEvent(new Event('langchange'));
+      }
+      b.addEventListener('click', function () {
+        if (busy) return;
+        var l = r.getAttribute('data-lang') === 'zh' ? 'en' : 'zh';
+        if (reduce) { swap(l); return; }
+        busy = true;
+        r.classList.add('lang-out');
+        setTimeout(function () {
+          swap(l);
+          r.classList.remove('lang-out');
+          setTimeout(function () { busy = false; }, 160);
+        }, 160);
       });
     })();
   </script>
