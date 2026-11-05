@@ -24,6 +24,13 @@
       try { t = localStorage.getItem('theme'); } catch (e) {}
       if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       r.setAttribute('data-theme', t);
+      var l = null, q = null;
+      try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+      if (q === 'zh' || q === 'en') { l = q; try { localStorage.setItem('lang', q); } catch (e) {} }
+      if (!l) { try { l = localStorage.getItem('lang'); } catch (e) {} }
+      if (l !== 'zh' && l !== 'en') l = /^zh/i.test((navigator.languages && navigator.languages[0]) || navigator.language || '') ? 'zh' : 'en';
+      r.setAttribute('data-lang', l);
+      r.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
     })();
   </script>
 </head>
@@ -31,11 +38,11 @@
   <div class="wash" aria-hidden="true"><span class="wash-blob" data-speed="0.08" style="--top:1%;--left:58%;--size:780px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-0s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.14" style="--top:14%;--left:-14%;--size:620px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-7s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.1" style="--top:30%;--left:62%;--size:700px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-14s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.18" style="--top:50%;--left:-10%;--size:640px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-21s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.06" style="--top:68%;--left:55%;--size:720px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-28s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.12" style="--top:86%;--left:10%;--size:760px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-35s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span></div>
   <div class="site-shell">
     <header class="site-header">
-      <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.title | escape }}<span aria-hidden="true">.</span></a>
-      <nav aria-label="Main navigation"><a href="{{ '/' | relative_url }}#about">About</a><a href="{{ '/' | relative_url }}#profile">Experience</a><a href="{{ '/' | relative_url }}#skills">Skills</a><a href="{{ '/' | relative_url }}#honors">Honors &amp; Awards</a><a href="{{ '/' | relative_url }}#journal">Learning Notes</a><button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button></nav>
+      <a class="wordmark" href="{{ '/' | relative_url }}"><bdi class="en">{{ site.title | escape }}</bdi><bdi class="zh">赵国旭</bdi><span aria-hidden="true">.</span></a>
+      <nav aria-label="Main navigation"><a href="{{ '/' | relative_url }}#about"><bdi class="en">About</bdi><bdi class="zh">关于我</bdi></a><a href="{{ '/' | relative_url }}#profile"><bdi class="en">Experience</bdi><bdi class="zh">经历</bdi></a><a href="{{ '/' | relative_url }}#skills"><bdi class="en">Skills</bdi><bdi class="zh">技能</bdi></a><a href="{{ '/' | relative_url }}#honors"><bdi class="en">Awards</bdi><bdi class="zh">奖项</bdi></a><a href="{{ '/' | relative_url }}#journal"><bdi class="en">Learning Notes</bdi><bdi class="zh">学习笔记</bdi></a><span class="toggles"><button class="lang-toggle" type="button" aria-label="Switch language" title="English / 中文"><span class="lg-en">EN</span><span class="lg-zh">中</span></button><button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button></span></nav>
     </header>
     <main>{{ content }}</main>
-    <footer class="site-footer"><span>© {{ 'now' | date: '%Y' }} {{ site.title | escape }}</span></footer>
+    <footer class="site-footer"><span>© {{ 'now' | date: '%Y' }} <bdi class="en">{{ site.title | escape }}</bdi><bdi class="zh">赵国旭</bdi></span></footer>
   </div>
   <script>
     (function () {
@@ -54,44 +61,80 @@
   </script>
   <script>
     (function () {
-      var el = document.querySelector('.hero-note');
-      if (!el) return;
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var text = el.textContent.trim();
-      if (reduce || !text) { el.classList.add('tw-ready'); return; }
-      el.setAttribute('aria-label', text);
-      var wrap = document.createElement('span');
-      wrap.setAttribute('aria-hidden', 'true');
-      var chars = [];
-      text.split(' ').forEach(function (word, i, all) {
-        var w = document.createElement('span');
-        w.className = 'tw-word';
-        Array.from(word).forEach(function (c) {
-          var s = document.createElement('span');
-          s.className = 'tw-ch';
-          s.textContent = c;
-          w.appendChild(s);
-          chars.push(s);
-        });
-        wrap.appendChild(w);
-        if (i < all.length - 1) wrap.appendChild(document.createTextNode(' '));
-      });
-      var cursor = document.createElement('span');
-      cursor.className = 'tw-cursor';
-      el.textContent = '';
-      el.appendChild(wrap);
-      chars[0].parentNode.insertBefore(cursor, chars[0]);
-      el.classList.add('tw-ready');
-      var n = 0;
-      function step() {
-        var c = chars[n];
-        c.classList.add('on');
-        n++;
-        if (n < chars.length) chars[n].parentNode.insertBefore(cursor, chars[n]);
-        else c.parentNode.appendChild(cursor);
-        if (n < chars.length) setTimeout(step, /[,.]/.test(c.textContent) ? 320 : 38 + Math.random() * 34);
+      var r = document.documentElement, b = document.querySelector('.lang-toggle');
+      function labels(l) {
+        document.querySelectorAll('[data-en][data-zh]').forEach(function (el) { el.setAttribute(el.tagName === 'IMG' ? 'alt' : 'aria-label', el.getAttribute('data-' + l)); });
+        if (b) b.setAttribute('aria-label', l === 'zh' ? '切换语言，当前为中文' : 'Switch language, currently English');
       }
-      setTimeout(step, 700);
+      labels(r.getAttribute('data-lang'));
+      if (!b) return;
+      b.addEventListener('click', function () {
+        var l = r.getAttribute('data-lang') === 'zh' ? 'en' : 'zh';
+        r.setAttribute('data-lang', l);
+        r.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
+        try { localStorage.setItem('lang', l); } catch (e) {}
+        labels(l);
+        document.dispatchEvent(new Event('langchange'));
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var note = document.querySelector('.hero-note');
+      if (!note) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var r = document.documentElement, timer = 0, cursor = document.createElement('span');
+      cursor.className = 'tw-cursor';
+      var parts = {};
+      ['en', 'zh'].forEach(function (l) {
+        var el = note.querySelector('.' + l);
+        if (el) parts[l] = { el: el, text: el.textContent.trim() };
+      });
+      function plain() {
+        Object.keys(parts).forEach(function (l) { parts[l].el.textContent = parts[l].text; });
+        if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+      }
+      function type(delay) {
+        clearTimeout(timer);
+        plain();
+        var l = r.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+        var p = parts[l];
+        if (reduce || !p || !p.text) { note.classList.add('tw-ready'); return; }
+        note.setAttribute('aria-label', p.text);
+        var wrap = document.createElement('span');
+        wrap.setAttribute('aria-hidden', 'true');
+        var chars = [];
+        var words = l === 'zh' ? Array.from(p.text).map(function (c) { return c; }) : p.text.split(' ');
+        words.forEach(function (word, i, all) {
+          var w = document.createElement('span');
+          w.className = 'tw-word';
+          Array.from(word).forEach(function (c) {
+            var s = document.createElement('span');
+            s.className = 'tw-ch';
+            s.textContent = c;
+            w.appendChild(s);
+            chars.push(s);
+          });
+          wrap.appendChild(w);
+          if (l === 'en' && i < all.length - 1) wrap.appendChild(document.createTextNode(' '));
+        });
+        p.el.textContent = '';
+        p.el.appendChild(wrap);
+        chars[0].parentNode.insertBefore(cursor, chars[0]);
+        note.classList.add('tw-ready');
+        var n = 0;
+        function step() {
+          var c = chars[n];
+          c.classList.add('on');
+          n++;
+          if (n < chars.length) chars[n].parentNode.insertBefore(cursor, chars[n]);
+          else c.parentNode.appendChild(cursor);
+          if (n < chars.length) timer = setTimeout(step, /[,.，。]/.test(c.textContent) ? 320 : 38 + Math.random() * 34);
+        }
+        timer = setTimeout(step, delay);
+      }
+      type(700);
+      document.addEventListener('langchange', function () { type(150); });
     })();
   </script>
   <script>
@@ -163,10 +206,14 @@
       var colors = { light: '#f8f6f0', dark: '#1f1c19' };
       function apply(t) {
         r.setAttribute('data-theme', t);
-        b.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        var zh = r.getAttribute('data-lang') === 'zh';
+        var label = zh ? (t === 'dark' ? '切换到浅色模式' : '切换到深色模式') : (t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        b.setAttribute('aria-label', label);
+        b.setAttribute('title', label);
         metas.forEach(function (m) { m.removeAttribute('media'); m.setAttribute('content', colors[t]); });
       }
       apply(r.getAttribute('data-theme'));
+      document.addEventListener('langchange', function () { apply(r.getAttribute('data-theme')); });
       b.addEventListener('click', function () {
         var t = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         apply(t);

@@ -2,7 +2,7 @@
 layout: default
 ---
 <article class="article">
-  <a class="back-link" href="{{ '/' | relative_url }}#journal">← Back to posts</a>
+  <a class="back-link" href="{{ '/' | relative_url }}#journal"><bdi class="en">← Back to posts</bdi><bdi class="zh">← 返回文章列表</bdi></a>
   <header class="article-header"><time class="article-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time><h1>{{ page.title | escape }}</h1></header>
   <div class="prose">{{ content }}</div>
 </article>
