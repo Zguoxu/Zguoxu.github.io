@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ page.description | default: site.description | escape }}">
   <title>{% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>
-  <meta name="theme-color" content="#f8f6f0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#1f1c19" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1f1e1d" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.title | escape }}">
   <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
@@ -16,6 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="{{ '/assets/images/og-image.png' | absolute_url }}">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+  <link rel="preload" href="{{ '/assets/fonts/source-serif-4-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/blog.css' | relative_url }}">
   <script>document.documentElement.classList.add('js');</script>
   <script>
@@ -35,15 +36,21 @@
   </script>
 </head>
 <body>
-  <div class="wash" aria-hidden="true"><span class="wash-blob" data-speed="0.08" style="--top:1%;--left:58%;--size:780px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-0s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.14" style="--top:14%;--left:-14%;--size:620px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-7s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.1" style="--top:30%;--left:62%;--size:700px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-14s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.18" style="--top:50%;--left:-10%;--size:640px;--c:var(--wash-1)"><b class="wash-spin wash-a" style="--delay:-21s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.06" style="--top:68%;--left:55%;--size:720px;--c:var(--wash-2)"><b class="wash-spin wash-b" style="--delay:-28s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span><span class="wash-blob" data-speed="0.12" style="--top:86%;--left:10%;--size:760px;--c:var(--wash-3)"><b class="wash-spin wash-c" style="--delay:-35s"><i class="wash-shape s1"></i><i class="wash-shape s2"></i></b></span></div>
-  <div class="site-shell">
-    <header class="site-header">
+  <header class="site-header">
+    <div class="site-shell header-inner">
       <a class="wordmark" href="{{ '/' | relative_url }}"><bdi class="en">{{ site.title | escape }}</bdi><bdi class="zh">赵国旭</bdi><span aria-hidden="true">.</span></a>
-      <nav aria-label="Main navigation"><a href="{{ '/' | relative_url }}#about"><bdi class="en">About</bdi><bdi class="zh">关于我</bdi></a><a href="{{ '/' | relative_url }}#profile"><bdi class="en">Experience</bdi><bdi class="zh">经历</bdi></a><a href="{{ '/' | relative_url }}#skills"><bdi class="en">Skills</bdi><bdi class="zh">技能</bdi></a><a href="{{ '/' | relative_url }}#honors"><bdi class="en">Awards</bdi><bdi class="zh">奖项</bdi></a><a href="{{ '/' | relative_url }}#journal"><bdi class="en">Learning Notes</bdi><bdi class="zh">学习笔记</bdi></a><span class="toggles"><button class="lang-toggle" type="button" aria-label="Switch language" title="English / 中文"><span class="lg-en">EN</span><span class="lg-zh">中</span></button><button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button></span></nav>
-    </header>
-    <main>{{ content }}</main>
-    <footer class="site-footer"><span>© {{ 'now' | date: '%Y' }} <bdi class="en">{{ site.title | escape }}</bdi><bdi class="zh">赵国旭</bdi></span></footer>
-  </div>
+      <nav aria-label="Main navigation"><a href="{{ '/' | relative_url }}#about"><bdi class="en">About</bdi><bdi class="zh">关于我</bdi></a><a href="{{ '/' | relative_url }}#profile"><bdi class="en">Experience</bdi><bdi class="zh">经历</bdi></a><a href="{{ '/' | relative_url }}#skills"><bdi class="en">Skills</bdi><bdi class="zh">技能</bdi></a><a href="{{ '/' | relative_url }}#honors"><bdi class="en">Awards</bdi><bdi class="zh">奖项</bdi></a><a href="{{ '/' | relative_url }}#journal"><bdi class="en">Learning Notes</bdi><bdi class="zh">学习笔记</bdi></a></nav>
+      <span class="toggles"><button class="lang-toggle" type="button" aria-label="Switch language" title="English / 中文"><span class="lg-en">EN</span><span class="lg-zh">中</span></button><button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch theme"><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button></span>
+    </div>
+  </header>
+  <main class="site-shell">{{ content }}</main>
+  <footer class="site-footer">
+    <div class="site-shell footer-inner">
+      <a class="wordmark footer-wordmark" href="{{ '/' | relative_url }}"><bdi class="en">{{ site.title | escape }}</bdi><bdi class="zh">赵国旭</bdi><span aria-hidden="true">.</span></a>
+      <nav class="footer-nav" aria-label="Footer navigation"><a href="{{ '/' | relative_url }}#about"><bdi class="en">About</bdi><bdi class="zh">关于我</bdi></a><a href="{{ '/' | relative_url }}#profile"><bdi class="en">Experience</bdi><bdi class="zh">经历</bdi></a><a href="{{ '/' | relative_url }}#skills"><bdi class="en">Skills</bdi><bdi class="zh">技能</bdi></a><a href="{{ '/' | relative_url }}#honors"><bdi class="en">Awards</bdi><bdi class="zh">奖项</bdi></a><a href="{{ '/' | relative_url }}#journal"><bdi class="en">Learning Notes</bdi><bdi class="zh">学习笔记</bdi></a></nav>
+      <p class="footer-copy"><span>© {{ 'now' | date: '%Y' }} <bdi class="en">{{ site.title | escape }}</bdi><bdi class="zh">赵国旭</bdi></span></p>
+    </div>
+  </footer>
   <script>
     (function () {
       var items = document.querySelectorAll('.reveal');
@@ -152,23 +159,6 @@
   </script>
   <script>
     (function () {
-      var blobs = document.querySelectorAll('.wash-blob');
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!blobs.length || reduce) return;
-      var ticking = false;
-      function update() {
-        var y = window.pageYOffset;
-        blobs.forEach(function (b) { b.style.transform = 'translate3d(0,' + (y * b.dataset.speed).toFixed(1) + 'px,0)'; });
-        ticking = false;
-      }
-      window.addEventListener('scroll', function () {
-        if (!ticking) { ticking = true; requestAnimationFrame(update); }
-      }, { passive: true });
-      update();
-    })();
-  </script>
-  <script>
-    (function () {
       var spark = document.querySelector('.eye-spark');
       if (!spark || !window.matchMedia) return;
       var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -216,7 +206,7 @@
       var r = document.documentElement, b = document.querySelector('.theme-toggle');
       if (!b) return;
       var metas = document.querySelectorAll('meta[name="theme-color"]');
-      var colors = { light: '#f8f6f0', dark: '#1f1c19' };
+      var colors = { light: '#faf9f5', dark: '#1f1e1d' };
       function apply(t) {
         r.setAttribute('data-theme', t);
         var zh = r.getAttribute('data-lang') === 'zh';
